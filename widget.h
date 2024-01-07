@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QNetworkAccessManager>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,9 +18,12 @@ public:
 
 private slots:
     void on_btnCount_clicked();
+    static void ReplyFinished(QNetworkReply *reply);
 
 private:
     Ui::Widget *ui;
     int cnt;
+    QNetworkAccessManager *manager;
+    QNetworkRequest request;
 };
 #endif // WIDGET_H
