@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QNetworkAccessManager>
+#include "ApiDevice.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -18,12 +19,11 @@ public:
 
 private slots:
     void on_btnCount_clicked();
-    static void ReplyFinished(QNetworkReply *reply);
+    void get_count(int count);
 
 private:
     Ui::Widget *ui;
     int cnt;
-    QNetworkAccessManager *manager;
-    QNetworkRequest request;
+    ApiDevice *apiDevice;
 };
 #endif // WIDGET_H

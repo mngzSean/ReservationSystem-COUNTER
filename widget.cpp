@@ -3,6 +3,8 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QString>
+#include <QRegExp>
+#include "ApiDevice.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -12,26 +14,24 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     ui->lblCount->setText(QString::number(cnt));
 
-    manager = new QNetworkAccessManager(this);
-    connect(manager, &QNetworkAccessManager::finished, this, &ReplyFinished);
-
+    apiDevice = new ApiDevice();
+    connect(apiDevice, &ApiDevice::replyCount, this, &Widget::get_count);
+    apiDevice->requestCount();
 }
 
 Widget::~Widget()
 {
+    delete apiDevice;
     delete ui;
 }
 
+void Widget::get_count(int cnt)
+{
+    ui->lblCount->setText(QString::number(cnt));
+}
 
 void Widget::on_btnCount_clicked()
 {
-    ui->lblCount->setText(QString::number(++cnt));
-    manager->get(QNetworkRequest(QUrl("http://localhost:5175/Device/counter")));
-}
-
-void Widget::ReplyFinished(QNetworkReply *reply)
-{
-    qDebug() << reply->url();
-    QString answer = reply->readAll();
-    qDebug() << answer;
+    apiDevice->requestIssue();
+    apiDevice->requestCount();
 }
