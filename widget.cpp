@@ -33,5 +33,4 @@ void Widget::get_count(int cnt)
 void Widget::on_btnCount_clicked()
 {
     apiDevice->requestIssue();
-    apiDevice->requestCount();
 }

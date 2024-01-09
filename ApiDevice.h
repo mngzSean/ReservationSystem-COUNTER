@@ -8,7 +8,7 @@ class ApiDevice : public ApiHandler
     Q_OBJECT
 private:
     ApiHandler *handler = nullptr;
-    virtual void handle(QByteArray data) override;
+    virtual void handle(QString path, QByteArray data) override;
 public:
     void requestCount();
     void requestIssue();

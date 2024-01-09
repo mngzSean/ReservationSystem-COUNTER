@@ -30,5 +30,5 @@ void ApiHandler::requestPost(const QByteArray& data)
 
 void ApiHandler::response(QNetworkReply* reply)
 {
-    handle(reply->readAll());
+    handle(reply->url().path(), reply->readAll());
 }

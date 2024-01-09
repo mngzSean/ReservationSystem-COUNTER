@@ -19,7 +19,7 @@ protected:
     void requestGet();
     void requestPost();
     void requestPost(const QByteArray& data);
-    virtual void handle(QByteArray data) = 0;
+    virtual void handle(QString path, QByteArray data) = 0;
 public:
     ApiHandler();
     virtual ~ApiHandler() {}
